@@ -31,14 +31,14 @@ MongoClient.connect(url, (err, db) => {
         console.log("new user connected");
         socket.on('submitUser', (message) => {
             console.log(message);
-            dbs.collection('users').insertOne(message.fetchValues, (err, response) => {
+            dbs.collection('user').insertOne(message.fetchValues, (err, response) => {
                 console.log(response);
                 io.emit('newMessage', response.ops)
             });
         })
         socket.on('deleteAll',(msz)=>{
             console.log("all deleted");
-            dbs.collection('users').remove({}).then((result) => {
+            dbs.collection('user').remove({}).then((result) => {
                 console.log(result.result.n);
                 io.emit('deleted',`${result.result.n} user(s) deleted`);
              });
@@ -46,14 +46,14 @@ MongoClient.connect(url, (err, db) => {
         socket.on('deleteUser',(data)=>{
             console.log(data);
              let id =new ObjectID(data);
-            dbs.collection('users').findOneAndDelete({ _id: id }).then((result) => {
+            dbs.collection('user').findOneAndDelete({ _id: id }).then((result) => {
                 // res.status(200).send(result);
                 io.emit('deletedUser',result);
             })
         })
         socket.on('updateUser',(data)=>{
              console.log(data.id);
-            dbs.collection('users').findOneAndUpdate(
+            dbs.collection('user').findOneAndUpdate(
             {
                 _id: ObjectID(data.id)
             }, {
@@ -72,22 +72,22 @@ MongoClient.connect(url, (err, db) => {
     })
 
     // app.post('/save', (req, res) => {
-    //     dbs.collection('users').insertOne(req.body, (err, response) => {
+    //     dbs.collection('user').insertOne(req.body, (err, response) => {
     //         console.log(response.ops);
     //         if (err)
     //             res.status(404).send("unable to insert " + err);
     //         res.send(response.ops);
     //     });
     // });
-    app.get('/users', (req, res) => {
-        dbs.collection('users').find().toArray().then((response) => {
+    app.get('/user', (req, res) => {
+        dbs.collection('user').find().toArray().then((response) => {
             
                 res.status(200).send(response);
            
         });
     });
     // app.get('/deleteAll', (req, res) => {
-    //     dbs.collection('users').remove({}).then((result) => {
+    //     dbs.collection('user').remove({}).then((result) => {
     //         console.log(result.result.n);
     //         res.status(200).send(`${result.result.n} user(s) deleted`);
     //     })
@@ -95,13 +95,13 @@ MongoClient.connect(url, (err, db) => {
     // app.post('/delete', (req, res) => {
     //     console.log(req.body)
     //     let id = ObjectID(req.body._id);
-    //     dbs.collection('users').findOneAndDelete({ _id: id }).then((result) => {
+    //     dbs.collection('user').findOneAndDelete({ _id: id }).then((result) => {
     //         res.status(200).send(result);
     //     })
     // })
     app.post('/findUser', (req, res) => {
         console.log(req.body);
-        dbs.collection('users').find({ _id: ObjectID(req.body._id) }).toArray().then((result) => {
+        dbs.collection('user').find({ _id: ObjectID(req.body._id) }).toArray().then((result) => {
             console.log(result);
             res.send(result);
         })
@@ -109,7 +109,7 @@ MongoClient.connect(url, (err, db) => {
 
     // app.post('/updateUser', (req, res) => {
     //     console.log(req.body.id);
-    //     dbs.collection('users').findOneAndUpdate(
+    //     dbs.collection('user').findOneAndUpdate(
     //         {
     //             _id: ObjectID(req.body.id)
     //         }, {
