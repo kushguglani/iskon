@@ -31,7 +31,6 @@ MongoClient.connect(url, (err, db) => {
         console.log("new user connected");
         socket.on('submitUSer', (message) => {
             dbs.collection('users').insertOne(message.fetchValues, (err, response) => {
-                console.log(response.ops);
                 io.emit('newMessage', response.ops)
             });
         })
@@ -83,7 +82,7 @@ MongoClient.connect(url, (err, db) => {
             if (response) {
                 res.status(200).send(response);
             }
-            res.status(400).send("Unable t find user");
+            res.status(400).send("Unable to find user");
         });
     });
     // app.get('/deleteAll', (req, res) => {
