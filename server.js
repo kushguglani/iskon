@@ -18,12 +18,14 @@ app.use(bodyParser.json());
 const { MongoClient, ObjectID } = require('mongodb');
 var dbs;
 const url = process.env.MONGO_URI;
+console.log(port);
+console.log(url);
 MongoClient.connect(url, (err, db) => {
     if (err) {
         return console.log("error in connecting mongo db " + err);
     }
     console.log("Connected to mongodb");
-    dbs = db.db('krishna')
+    dbs = db.db('kush')
 
     io.on('connection', (socket) => {
         console.log("new user connected");
