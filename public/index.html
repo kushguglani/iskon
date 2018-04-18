@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Details of the Iscon voluntaries for managing prasad">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>ISKON</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/ionicons.min.css">
+</head>
+
+<body>
+    <section class="first-section">
+        <header>
+            <div class="row">
+                <h1>Iskon</h1>
+                <!--<h3>( International Society for Krishna Consciousness )</h3>-->
+            </div>
+        </header>
+        <section class="total-calculation">
+            <p class="total">Total Voluntary : <span class="number"></span> <a href="#" class="btn btn-ghost resetAll">ResetAll</a>
+        </section>
+        <section class="form-section">
+            <div class="row">
+                <h2> Voluntary Form Sign Up </h2>
+            </div>
+            <div class="row">
+                <form method="post" action="">
+                    <div class="row element-height">
+                        <label for="name">Name</label>
+                        <input class="input_name" type="text" id="name">
+                    </div>
+
+                    <div class="row element-height">
+                        <label for="mobile">Mobile</label>
+                        <input class="input_mobile" type="number" id="mobile">
+                    </div>
+
+                    <div class="row element-height">
+                        <label for="address">Address</label>
+                        <textarea class="input_address" id="address"></textarea>
+                    </div>
+
+                    <!--<div class="row element-height">
+                        <label for="address">Gender :</label>
+                        <input class="input_gender" value="male" type="radio" name="gender">Male
+                        <input class="input_gender" value="female" type="radio" name="gender">Female
+                    </div>-->
+                    <div class="row element-height">
+                        <a class="btn btn-full  form_submit">SUBMIT</a>
+                        <a class="btn btn-full  form_edit">Update</a>
+                        <input type="reset" value="Reset">
+                    </div>
+                </form>
+            </div>
+
+        </section>
+    </section>
+    <section class="details-section">
+        <h2 class="icome__title">Voluntary Details</h2>
+        <table>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Mobile
+                </th>
+                <th>
+                    Delete
+                </th>
+                <th>
+                    Edit
+                </th>
+            </tr>
+        </table>
+        <table class="data-table">
+            <thead>
+                <tr class="table-conatiner"></tr>
+            </thead>
+        </table>
+    </section>
+    <p class="error-toast"></p>
+    <div class="model">
+        <h3>Are you sure you wants to delete all voluntaries</h3>
+        <button id="delete" class="btn btn-full">Delete</button>
+        <button id="cancel" class="btn btn-ghost">Cancel</button>
+    </div>
+    <footer>
+    </footer>
+
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
