@@ -29,7 +29,8 @@ MongoClient.connect(url, (err, db) => {
 
     io.on('connection', (socket) => {
         console.log("new user connected");
-        socket.on('submitUSer', (message) => {
+        socket.on('submitUser', (message) => {
+            console.log(message);
             dbs.collection('users').insertOne(message.fetchValues, (err, response) => {
                 console.log(response);
                 io.emit('newMessage', response.ops)

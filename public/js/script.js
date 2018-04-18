@@ -255,9 +255,12 @@ const appController = ((UICtrl,voluntaryCtrl,DBCtrl)=>{
             return;
         }
         // emit submit user to server
-        socket.emit('submitUSer',{
-                fetchValues
-        })  
+        else {
+            console.log(fetchValues)
+            socket.emit('submitUser',{
+                    fetchValues
+            })  
+        }
     }
     let fetchUsers =()=>{
         var users;
