@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 const { MongoClient, ObjectID } = require('mongodb');
 var dbs;
 const url = process.env.MONGO_URI;
-MongoClient.connect('mongodb://localhost:27017/krishna', (err, db) => {
+MongoClient.connect(url, (err, db) => {
     if (err) {
         return console.log("error in connecting mongo db " + err);
     }
