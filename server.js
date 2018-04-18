@@ -70,14 +70,14 @@ MongoClient.connect(url, (err, db) => {
 
     })
 
-    app.post('/save', (req, res) => {
-        dbs.collection('users').insertOne(req.body, (err, response) => {
-            console.log(response.ops);
-            if (err)
-                res.status(404).send("unable to insert " + err);
-            res.send(response.ops);
-        });
-    });
+    // app.post('/save', (req, res) => {
+    //     dbs.collection('users').insertOne(req.body, (err, response) => {
+    //         console.log(response.ops);
+    //         if (err)
+    //             res.status(404).send("unable to insert " + err);
+    //         res.send(response.ops);
+    //     });
+    // });
     app.get('/users', (req, res) => {
         dbs.collection('users').find().toArray().then((response) => {
             if (response) {
@@ -86,19 +86,19 @@ MongoClient.connect(url, (err, db) => {
             res.status(400).send("Unable t find user");
         });
     });
-    app.get('/deleteAll', (req, res) => {
-        dbs.collection('users').remove({}).then((result) => {
-            console.log(result.result.n);
-            res.status(200).send(`${result.result.n} user(s) deleted`);
-        })
-    })
-    app.post('/delete', (req, res) => {
-        console.log(req.body)
-        let id = ObjectID(req.body._id);
-        dbs.collection('users').findOneAndDelete({ _id: id }).then((result) => {
-            res.status(200).send(result);
-        })
-    })
+    // app.get('/deleteAll', (req, res) => {
+    //     dbs.collection('users').remove({}).then((result) => {
+    //         console.log(result.result.n);
+    //         res.status(200).send(`${result.result.n} user(s) deleted`);
+    //     })
+    // })
+    // app.post('/delete', (req, res) => {
+    //     console.log(req.body)
+    //     let id = ObjectID(req.body._id);
+    //     dbs.collection('users').findOneAndDelete({ _id: id }).then((result) => {
+    //         res.status(200).send(result);
+    //     })
+    // })
     app.post('/findUser', (req, res) => {
         console.log(req.body);
         dbs.collection('users').find({ _id: ObjectID(req.body._id) }).toArray().then((result) => {
@@ -107,24 +107,24 @@ MongoClient.connect(url, (err, db) => {
         })
     });
 
-    app.post('/updateUser', (req, res) => {
-        console.log(req.body.id);
-        dbs.collection('users').findOneAndUpdate(
-            {
-                _id: ObjectID(req.body.id)
-            }, {
-                $set: {
-                    name: req.body.name,
-                    mobile: req.body.mobile,
-                    address: req.body.address,
-                }
-            }, {
-                returnOriginal: false
-            }).then((result) => {
-                console.log(result);
-                res.send(result);
-            })
-    })
+    // app.post('/updateUser', (req, res) => {
+    //     console.log(req.body.id);
+    //     dbs.collection('users').findOneAndUpdate(
+    //         {
+    //             _id: ObjectID(req.body.id)
+    //         }, {
+    //             $set: {
+    //                 name: req.body.name,
+    //                 mobile: req.body.mobile,
+    //                 address: req.body.address,
+    //             }
+    //         }, {
+    //             returnOriginal: false
+    //         }).then((result) => {
+    //             console.log(result);
+    //             res.send(result);
+    //         })
+    // })
 
 
 });
