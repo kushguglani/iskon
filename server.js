@@ -1,3 +1,5 @@
+require('./config/config.js');
+
 const http = require('http');
 
 const express = require('express');
@@ -79,7 +81,7 @@ MongoClient.connect('mongodb://localhost:27017/krishna', (err, db) => {
             if (response) {
                 res.status(200).send(response);
             }
-            res.status(400).send();
+            res.status(400).send("Unable t find user");
         });
     });
     app.get('/deleteAll', (req, res) => {
