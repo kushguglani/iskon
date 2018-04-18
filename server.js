@@ -1,4 +1,4 @@
-//require('./config/config.js');
+// require('./config/config.js');
 
 const http = require('http');
 
@@ -31,6 +31,7 @@ MongoClient.connect(url, (err, db) => {
         console.log("new user connected");
         socket.on('submitUSer', (message) => {
             dbs.collection('users').insertOne(message.fetchValues, (err, response) => {
+                console.log(response);
                 io.emit('newMessage', response.ops)
             });
         })
@@ -79,10 +80,9 @@ MongoClient.connect(url, (err, db) => {
     // });
     app.get('/users', (req, res) => {
         dbs.collection('users').find().toArray().then((response) => {
-            if (response) {
+            
                 res.status(200).send(response);
-            }
-            res.status(400).send("Unable to find user");
+           
         });
     });
     // app.get('/deleteAll', (req, res) => {
