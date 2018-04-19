@@ -84,7 +84,7 @@ MongoClient.connect(url, (err, db) => {
     //     });
     // });
     app.get('/users', (req, res) => {
-        dbs.collection('user').find({$status:1}).toArray().then((response) => {
+        dbs.collection('user').find({status:1}).toArray().then((response) => {
             
                 res.status(200).send(response);
            
