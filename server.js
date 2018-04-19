@@ -13,7 +13,6 @@ const io = socketIO(server);
 
 app.use(express.static('./public'));
 app.use(bodyParser.json());
-
 const { MongoClient, ObjectID } = require('mongodb');
 var dbs;
 const url = process.env.MONGO_URI;
@@ -84,8 +83,8 @@ MongoClient.connect(url, (err, db) => {
     //     });
     // });
     app.get('/users', (req, res) => {
-        dbs.collection('user').find({status:1}).toArray().then((response) => {
-            
+        dbs.collection('user').find({"status":1}).toArray().then((response) => {
+                console.log(response);
                 res.status(200).send(response);
            
         });
@@ -105,7 +104,7 @@ MongoClient.connect(url, (err, db) => {
     // })
     app.post('/findUser', (req, res) => {
         console.log(req.body);
-        dbs.collection('user').find({ _id: ObjectID(req.body._id),status:1 }).toArray().then((result) => {
+        dbs.collection('user').find({"_id": ObjectID(req.body._id),"status":1 }).toArray().then((result) => {
             console.log(result);
             res.send(result);
         })

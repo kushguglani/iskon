@@ -1,7 +1,8 @@
 
 //----------------UIController ----------------
 
-var socket = io('https://shrouded-reaches-98138.herokuapp.com/');
+// var socket = io('https://shrouded-reaches-98138.herokuapp.com/');
+var socket = io();
 
 // socket.on('connect',()=>{
 //     console.log("New user Welcom");
@@ -11,7 +12,7 @@ const UIController = (()=>{
         formSubmit : '.form_submit',
         name :'.input_name',
         mobile :'.input_mobile',
-        address :'.input_address',
+        email :'.input_email',
         gender :'.input_gender',
         tableConatiner:'.table-conatiner',
         count:'.number',
@@ -40,7 +41,7 @@ const UIController = (()=>{
             return{
                 name:document.querySelector(DOMstrings.name).value,
                 mobile:document.querySelector(DOMstrings.mobile).value,
-                address:document.querySelector(DOMstrings.address).value
+                email:document.querySelector(DOMstrings.email).value
                 // gender:document.querySelector(DOMstrings.gender).checked
             }
         },
@@ -60,7 +61,7 @@ const UIController = (()=>{
         clearFields:()=>{
             document.querySelector(DOMstrings.name).value ="";
             document.querySelector(DOMstrings.mobile).value ="";
-            document.querySelector(DOMstrings.address).value ="";
+            document.querySelector(DOMstrings.email).value ="";
             // document.querySelector(DOMstrings.gender).checked =false;
         },
         showAllUsers:(users)=>{
@@ -100,7 +101,7 @@ const UIController = (()=>{
             document.querySelector(DOMstrings.name).value =data[0].name;
             document.querySelector(DOMstrings.formSubmit).style.display = 'none';
             document.querySelector(DOMstrings.mobile).value =data[0].mobile;
-            document.querySelector(DOMstrings.address).value =data[0].address;
+            document.querySelector(DOMstrings.email).value =data[0].email;
             document.querySelector(DOMstrings.editForm).style.display ="inline-block";
             document.querySelector(DOMstrings.editForm).id=data[0]._id;
         }
@@ -110,11 +111,11 @@ const UIController = (()=>{
 
 //----------------voluntaryController -----------
 const voluntaryController = (()=>{
-    let Voluntary = function(name,mobile,address) {
+    let Voluntary = function(name,mobile,email) {
         
         this.name = name;
         this.mobile = mobile;
-        this.address = address;
+        this.email = email;
         // this.gender = gender;
     }
     var data=[];
@@ -123,7 +124,7 @@ const voluntaryController = (()=>{
             if(fetchValues.name ===""){
                 return;
             }
-            let newVolunatry = new Voluntary(fetchValues.name,fetchValues.mobile,fetchValues.address);
+            let newVolunatry = new Voluntary(fetchValues.name,fetchValues.mobile,fetchValues.email);
             data.push(newVolunatry);
             return newVolunatry;
         },
@@ -148,7 +149,7 @@ const DBController =(()=>{
                 cache: false,
                 })
                 .done(function(data) {
-                    users = data;
+                    console.log(data);
                     return data;
                 })
                 .fail(function(xhr) {

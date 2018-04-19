@@ -1,5 +1,5 @@
 /*-----------------------*/
-/*color:#F97F51*/
+/*color:#F97F51,ff7f00*/
 /*Daek color:#f86730*/
 /*-----------------------*/
 
@@ -48,7 +48,7 @@ h2:after{
 	content: " ";
 	text-align: center;
 	width: 100px;
-	background-color: #F97F51;
+	background-color: #ff7f00;
 	display: block;
 	height: 2px;
 	margin: 0 auto;
@@ -63,17 +63,17 @@ h2:after{
 	text-decoration: none;
 	border-radius: 200px;
 	outline:none;
-	border : 1px solid #F97F51;
+	border : 1.2px solid #ff7f00;
 }
 .btn-full,input[type=submit]{
-	background-color: #F97F51;
+	background-color: #ff7f00;
 	color:#fff;
 	margin-right:20px;
 	
 }
 .btn-ghost,input[type=reset]{
 	background-color:transparent;
-	color:#F97F51;
+	color:#ff7f00;
 	margin-left:20px;
 }
 .form_edit{
@@ -107,19 +107,29 @@ header{
 form{
 	padding-top: 30px;    
 	position: relative;
-    padding-top: 30px;
+    padding-top: 40px;
     width: 50%;
     margin: 0 auto;
     text-align: left;
 }
-input[type=text],input[type=number],textarea {
+input[type=email]{
+	margin-bottom: 20px;
+}
+input[type=text],input[type=number],input[type=email] {
 	width: 95%;
     padding: 8px;
     border-radius: 3px;
-    border: 3px solid grey;
+	border: none;
+    border-bottom: 2px solid grey;
     background-color: transparent;
     color: #fff;
 }
+
+input:focus{
+	border: none;
+	border-bottom: 2px solid #ff7f00 !important;
+}
+
 .element-height{
 	margin-bottom:20px;
 }
@@ -154,7 +164,7 @@ tr{
 	/*width: 100%;*/
 }
 th {
-    background-color: #f86730;
+    background-color: #ff7f00;
     color: white;
 }
 td:last-child,th:last-child{
@@ -228,7 +238,7 @@ tbody:nth-child(even){background-color: #f2f2f2}
 		width: 100%;
 	}
 	section{
-		padding:10px 0;
+		padding:21px 0;
 	}
 	h3{
 		font-size: 100%;
