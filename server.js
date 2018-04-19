@@ -1,5 +1,4 @@
 // require('./config/config.js');
-
 const http = require('http');
 
 const express = require('express');
@@ -30,7 +29,8 @@ MongoClient.connect(url, (err, db) => {
     io.on('connection', (socket) => {
         console.log("new user connected");
         socket.on('submitUser', (message) => {
-            console.log(message);
+            message.fetchValues.status = 1;
+            console.log(message.fetchValues);
             dbs.collection('user').insertOne(message.fetchValues, (err, response) => {
                 console.log(response);
                 io.emit('newMessage', response.ops)
@@ -38,7 +38,9 @@ MongoClient.connect(url, (err, db) => {
         })
         socket.on('deleteAll',(msz)=>{
             console.log("all deleted");
-            dbs.collection('user').remove({}).then((result) => {
+            dbs.collection('user').updateMany({},{
+                $set:{status:0}
+            }).then((result) => {
                 console.log(result.result.n);
                 io.emit('deleted',`${result.result.n} user(s) deleted`);
              });
@@ -46,7 +48,9 @@ MongoClient.connect(url, (err, db) => {
         socket.on('deleteUser',(data)=>{
             console.log(data);
              let id =new ObjectID(data);
-            dbs.collection('user').findOneAndDelete({ _id: id }).then((result) => {
+            dbs.collection('user').findOneAndUpdate({ _id: id },{
+                $set:{status:0}
+            }).then((result) => {
                 // res.status(200).send(result);
                 io.emit('deletedUser',result);
             })
@@ -80,7 +84,7 @@ MongoClient.connect(url, (err, db) => {
     //     });
     // });
     app.get('/users', (req, res) => {
-        dbs.collection('user').find().toArray().then((response) => {
+        dbs.collection('user').find({$status:1}).toArray().then((response) => {
             
                 res.status(200).send(response);
            
@@ -101,7 +105,7 @@ MongoClient.connect(url, (err, db) => {
     // })
     app.post('/findUser', (req, res) => {
         console.log(req.body);
-        dbs.collection('user').find({ _id: ObjectID(req.body._id) }).toArray().then((result) => {
+        dbs.collection('user').find({ _id: ObjectID(req.body._id),status:1 }).toArray().then((result) => {
             console.log(result);
             res.send(result);
         })

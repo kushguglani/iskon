@@ -1,7 +1,7 @@
 
 //----------------UIController ----------------
 
-var socket = io();
+var socket = io('https://shrouded-reaches-98138.herokuapp.com/');
 
 // socket.on('connect',()=>{
 //     console.log("New user Welcom");
